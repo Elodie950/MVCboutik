@@ -29,8 +29,7 @@ namespace AdopteUneDev.DAL
         {
             get { return _categories; }
         }
-        //public Categories IdCategory
-        //{ get; set; }
+        
 
         #endregion
 
