@@ -43,7 +43,7 @@ namespace AdopteUneDev.DAL
         #region Static
         private List<ITLang> ChargerLesITLangs() 
         {
-            string query=@"Select * from LangCateg c inner join ITLang i on c.idIT where c.idCategory=" + this.IdCategory;
+            string query=@"Select * from ITLang i inner join LangCateg c on c.idIT = i.idIT where c.idCategory=" + this.IdCategory;
             List<Dictionary<string, object>> MesLangs = GestionConnexion.Instance.getData(query);
             List<ITLang> retour = new List<ITLang>();
             foreach(Dictionary<string, object> item in MesLangs)
