@@ -210,7 +210,7 @@ namespace MVCBoutik.Helper
                 TagBuilder sousCache = new TagBuilder("div");
                 sousCache.AddCssClass("overlay-content");
 
-
+                return
             } 
 
         }
