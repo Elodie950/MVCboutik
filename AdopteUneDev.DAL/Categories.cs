@@ -43,9 +43,13 @@ namespace AdopteUneDev.DAL
         #region Static
         private List<ITLang> ChargerLesITLangs() 
         {
-            string query=@"Select * from ITLang i inner join LangCateg c on c.idIT = i.idIT where c.idCategory=" + this.IdCategory;
-            List<Dictionary<string, object>> MesLangs = GestionConnexion.Instance.getData(query);
+            string query = @"select i.idIT,i.ITLabel from ITLang  i
+                            inner join LangCateg c
+                            on c.idIT = i.idIT
+                            where c.idCategory =" + this.IdCategory;
             List<ITLang> retour = new List<ITLang>();
+            List<Dictionary<string, object>> MesLangs = GestionConnexion.Instance.getData(query);
+            
             foreach(Dictionary<string, object> item in MesLangs)
             {
                 ITLang l = new ITLang();
@@ -80,7 +84,7 @@ namespace AdopteUneDev.DAL
         {
             Categories cat = new Categories();
             cat.IdCategory = int.Parse(infoUneCateg["idCategory"].ToString());
-            cat.CategLabel = infoUneCateg["categLabel"].ToString();
+            cat.CategLabel = infoUneCateg["CategLabel"].ToString();
             return cat;
         }
         #endregion

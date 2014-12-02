@@ -12,6 +12,7 @@ namespace AdopteUneDev.DAL
         private int _idIT;
         private string _iTLabel;
         private List<Categories> _categories;
+        private List<Developer> _developers;
         #endregion
 
         #region Properties
@@ -27,7 +28,11 @@ namespace AdopteUneDev.DAL
         }
         public List<Categories> Categories
         {
-            get { return _categories; }
+            get { return _categories = _categories ?? ChargerLesCategories(); }
+        }
+        public List<Developer> Developer
+        {
+            get { return _developers = _developers ?? ChargerLesDevelopers(); }
         }
         
 
@@ -35,15 +40,42 @@ namespace AdopteUneDev.DAL
 
 
         #region Static
+        private List<Developer> ChargerLesDevelopers()
+        {
+            string query = @"select d.idDev, d.DevName, d.DevFirstName, d.DevBirthDate, d.DevDayCost, d.DevMail, d.DevHourCost, d.DevMonthCost,d.DevPicture from Developer d
+                            inner join DevLang de 
+                            on d.idDev = de.idDev
+                            where de.idIT =" + this.IdIT;
+            List<Dictionary<string, object>> MesDevelopers = GestionConnexion.Instance.getData(query);
+            List<Developer> retour = new List<Developer>();
+            foreach (Dictionary<string, object> item in MesDevelopers)
+            {
+                Developer d = new Developer();
+                d.IdDev = (int)item["idDev"];
+                d.DevName = item["DevName"].ToString();
+                d.DevFirstName = item["DevFirstName"].ToString();
+                d.DevBirthDate = DateTime.Parse(item["DevBirthDate"].ToString());
+                d.DevDayCost = (double)item["DevDayCost"];
+                d.DevMail = item["DevMail"].ToString();
+                d.DevHourCost = (double)item["DevHourCost"];
+                d.DevMonthCost = (double)item["DevMonthCost"];
+                d.DevPicture = item["DevPicture"] == null ? "" : item["DevPicture"].ToString();
+                retour.Add(d);
+            }
+            return retour;
+        }
         private List<Categories> ChargerLesCategories()
         {
-            string query = @"Select * from LangCateg c inner join ITLang i  on c.idIT = i.idIT where i.idIT=" + this.IdIT;
+            string query = @"select * from Categories c
+                            inner join LangCateg l 
+                            on c.idCategory = l.idCategory
+                            where l.idIT =" + this.IdIT;
             List<Dictionary<string, object>> MesCategories = GestionConnexion.Instance.getData(query);
             List<Categories> retour = new List<Categories>();
             foreach (Dictionary<string, object> item in MesCategories)
             {
                 Categories c = new Categories();
-                c.IdCategory = int.Parse(item["idCategory"].ToString());
+                c.IdCategory = (int)item["idCategory"];
                 c.CategLabel = item["categLabel"].ToString();
                 retour.Add(c);
             }
@@ -62,7 +94,7 @@ namespace AdopteUneDev.DAL
         {
             List<Dictionary<string, object>> infoLesLangues = GestionConnexion.Instance.getData("Select * from ITLang");
             List<ITLang> retour = new List<ITLang>();
-            foreach (var item in infoLesLangues)
+            foreach (Dictionary<string, object> item in infoLesLangues)
             {
 
                 retour.Add(Associe(item));
@@ -73,8 +105,8 @@ namespace AdopteUneDev.DAL
         private static ITLang Associe(Dictionary<string, object> infoUnelang)
         {
             ITLang itl = new ITLang();
-            itl.IdIT = int.Parse(infoUnelang["idIT"].ToString());
-            itl.ITLabel = infoUnelang["iTLabel"].ToString();
+            itl.IdIT = (int)infoUnelang["idIT"];
+            itl.ITLabel = infoUnelang["ITLabel"].ToString();
             return itl;
         }
         #endregion

@@ -1,4 +1,5 @@
 ﻿using AdopteUneDev.DAL;
+using MVCBoutik.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,13 +10,14 @@ namespace MVCBoutik.Controllers
 {
     public class HomeController : Controller
     {
-        //
-        // GET: /Home/
-        public ActionResult Index()
-        {
-            Client maListe = Client.getInfo(1);
-            return View(maListe);
+     //
+            // GET: /Home/
+            public ActionResult Index()
+            {
+                langCategDev maBoite = new langCategDev();
+                maBoite.LstCateg = Categories.getInfosCategs();
+                maBoite.LstLang = ITLang.getInfosItLangs();
+                return View(maBoite);
+            }
         }
-
-	}
 }

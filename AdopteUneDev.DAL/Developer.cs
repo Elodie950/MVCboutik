@@ -15,10 +15,11 @@ namespace AdopteUneDev.DAL
         private string _devFirstName;
         private DateTime _devBirthDate;
         private string _devPicture;
-        private float _devHourCost;
-        private float _devDayCost;
-        private float _devMonthCost;
+        private double _devHourCost;
+        private double _devDayCost;
+        private double _devMonthCost;
         private string _devMail;
+        private List<ITLang> _itLangs;
         #endregion
 
         #region Proprieties
@@ -47,17 +48,17 @@ namespace AdopteUneDev.DAL
             get { return _devPicture; }
             set { _devPicture = value; }
         }
-        public float DevHourCost
+        public double DevHourCost
         {
             get { return _devHourCost; }
             set { _devHourCost = value; }
         }
-        public float DevDayCost
+        public double DevDayCost
         {
             get { return _devDayCost; }
             set { _devDayCost = value; }
         }
-        public float DevMonthCost
+        public double DevMonthCost
         {
             get { return _devMonthCost; }
             set { _devMonthCost = value; }
@@ -67,28 +68,91 @@ namespace AdopteUneDev.DAL
             get { return _devMail; }
             set { _devMail = value; }
         }
+        public List<ITLang> ItLangs
+        {
+            get
+            {
+                if (_itLangs == null)
+                {
+                    _itLangs = ChargerLesITLangs();
+                }
+                return _itLangs;
+            } //return _itLangs = _itLangs?? ChargerLesITLangs();
+        }
         #endregion
 
-        #region Constructor
-        public Developer() 
-        { 
-        }
-        public Developer(int idDev, string devName, string devFirstName, DateTime devBirthDate, float devHourCost, float devDayCost, float devMonthCost, string devMail, string devPicture = default(string))
-        {
-            this.IdDev = idDev;
-            this.DevName = devName;
-            this.DevFirstName = devFirstName;
-            this.DevBirthDate = devBirthDate;
-            this.DevPicture = devPicture;
-            this.DevHourCost = devHourCost;
-            this.DevDayCost = devDayCost;
-            this.DevMonthCost = devMonthCost;
-            this.DevMail = devMail; 
-        }
-        #endregion
 
         #region Static
-        public static Developer getInfo(int identifiant)
+         private List<ITLang> ChargerLesITLangs() 
+        {
+            string query = @"select i.idIT,i.ITLabel from ITLang  i
+                            inner join DevLang d
+                            on d.idIT = i.idIT
+                            where d.Developer =" + this.IdDev;
+            List<ITLang> retour = new List<ITLang>();
+            List<Dictionary<string, object>> MesLangs = GestionConnexion.Instance.getData(query);
+            
+            foreach(Dictionary<string, object> item in MesLangs)
+            {
+                ITLang l = new ITLang();
+                l.IdIT = (int)item["idIT"];
+                l.ITLabel = item["ITLabel"].ToString();
+                retour.Add(l);
+            }
+            return retour;
+        }
+        /// <summary>
+         /// Peremet de récupérer la totalité des développeurs
+         /// </summary>
+         /// <returns>Une liste de Developer</returns>
+         public static List<Developer> ChargerTousLesDev()
+         {
+             List<Dictionary<string, object>> lstDevs =
+                 GestionConnexion.Instance.getData("select * from Developer");
+             List<Developer> retour = new List<Developer>();
+             foreach (Dictionary<string, object> item in lstDevs)
+             {
+                 Developer dev = Associe(item);
+                 retour.Add(dev);
+             }
+             return retour;
+         }
+         /// <summary>
+         /// Permet de récupérer 1 developpeur à partir de son ID
+         /// </summary>
+         /// <param name="idD">Id du developpeur a charger</param>
+         /// <returns>Le developpeur</returns>
+         public static Developer ChargerUnDev(int idD)
+         {
+             List<Dictionary<string, object>> UnDev =
+             GestionConnexion.Instance.getData("select * from Developer where idDev=" + idD);
+             Developer dev = Associe(UnDev[0]);
+             return dev;
+         }
+         /// <summary>
+         /// Permet d'associer les champs du dictionnaire aux propriétés correspondantes
+         /// </summary>
+         /// <param name="item">Un dictionnaire (nom col, valeur)</param>
+         /// <returns></returns>
+         private static Developer Associe(Dictionary<string, object> item)
+         {
+             Developer dev = new Developer()
+                {
+                    IdDev = (int)item["idDev"],
+                    DevName = item["DevName"].ToString(),
+                    DevFirstName = item["DevFirstName"].ToString(),
+                    DevBirthDate = DateTime.Parse(item["DevBirthDate"].ToString()),
+                    DevDayCost = (double)item["DevDayCost"],
+                    DevMail = item["DevMail"].ToString(),
+                    DevHourCost = (double)item["DevHourCost"],
+                    DevMonthCost = (double)item["DevMonthCost"],
+                    DevPicture = item["DevPicture"] == null ? "" : item["DevPicture"].ToString()
+                };
+             return dev;
+         }
+        
+         #endregion
+        /*public static Developer getInfo(int identifiant)
         {
             List<Dictionary<string, object>> infoDev = GestionConnexion.Instance.getData("Select * from Developer where idDev=" + identifiant);
             Developer d = new Developer();
@@ -188,6 +252,11 @@ namespace AdopteUneDev.DAL
             }
             return retour;
         }
-        #endregion
+        #endregion*/
+
+         public object ChargerUnDev()
+         {
+             throw new NotImplementedException();
+         }
     }
 }
