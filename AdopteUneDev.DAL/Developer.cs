@@ -19,7 +19,10 @@ namespace AdopteUneDev.DAL
         private double _devDayCost;
         private double _devMonthCost;
         private string _devMail;
+        private string _NomCategPrincipal;
+        private int _devCategPrincipal;
         private List<ITLang> _itLangs;
+        
         #endregion
 
         #region Proprieties
@@ -68,6 +71,16 @@ namespace AdopteUneDev.DAL
             get { return _devMail; }
             set { _devMail = value; }
         }
+        public string NomCategPrincipal
+        {
+            get {
+                if (_NomCategPrincipal == null)
+                {
+                    _NomCategPrincipal = ChargerNomCateg();
+                }
+                return _NomCategPrincipal;
+            }
+        }
         public List<ITLang> ItLangs
         {
             get
@@ -79,10 +92,25 @@ namespace AdopteUneDev.DAL
                 return _itLangs;
             } //return _itLangs = _itLangs?? ChargerLesITLangs();
         }
+        public int DevCategPrincipal
+        {
+            get { return _devCategPrincipal; }
+            set { _devCategPrincipal = value; }
+        }
+
         #endregion
 
 
         #region Static
+        private string ChargerNomCateg()
+        {
+            List<Dictionary<string, object>> maCateg = GestionConnexion.Instance.getData("select CategLabel from Categories where idCategory=" + this.DevCategPrincipal);
+            string categName = "";
+            if (maCateg[0]["CategLabel"] != null) categName = maCateg[0]["CategLabel"].ToString();
+            return categName;
+           
+        }
+
          private List<ITLang> ChargerLesITLangs() 
         {
             string query = @"select i.idIT,i.ITLabel from ITLang  i
@@ -146,6 +174,7 @@ namespace AdopteUneDev.DAL
                     DevMail = item["DevMail"].ToString(),
                     DevHourCost = (double)item["DevHourCost"],
                     DevMonthCost = (double)item["DevMonthCost"],
+                    DevCategPrincipal = (int)item["DevCategPrincipal"],
                     DevPicture = item["DevPicture"] == null ? "" : item["DevPicture"].ToString()
                 };
              return dev;

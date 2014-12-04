@@ -1,6 +1,7 @@
 ﻿using AdopteUneDev.DAL;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -142,77 +143,41 @@ namespace MVCBoutik.Helper
             return new MvcHtmlString(contenant.ToString());
         }
 
-         /*<div class="col-sm-4">
-                        <div class="product-image-wrapper">
-                            <div class="single-products">
-                                <div class="productinfo text-center">
-                                    <img src="~/Content/images/home/product1.jpg" alt="" />
-                                    <h2>Efje</h2>
-                                    <p>Super Web Developer</p>
-                                    <a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
-                                </div>
-                                <div class="product-overlay">
-                                    <div class="overlay-content">
-                                        <h2>$56</h2>
-                                        <p>Easy Polo Black Edition</p>
-                                        <a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="choose">
-                                <ul class="nav nav-pills nav-justified">
-                                    <li><a href="#"><i class="fa fa-plus-square"></i>Add to wishlist</a></li>
-                                    <li><a href="#"><i class="fa fa-plus-square"></i>Add to compare</a></li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>*/
-        public static MvcHtmlString AfficherDev(this HtmlHelper origin, IEnumerable<Developer> lesDev)
+
+        public static MvcHtmlString DeveloperOfTheMonth(this HtmlHelper origin, IEnumerable<Developer> lesDev)
         {
-            TagBuilder general = new TagBuilder("div");
-            general.AddCssClass("col-sm-4");
+            string returnStr = "";
+            foreach (Developer CurrentDev in lesDev)
+            {
+                returnStr += RenderPartialViewToString((Controller)HttpContext.Current.Session["CurrentController"],"_DevDisplay", CurrentDev);
+            }
 
-            TagBuilder general2 = new TagBuilder("div");
-            general2.AddCssClass("product-image-wrapper");
+            return new MvcHtmlString(returnStr); ;
+        }
 
-            TagBuilder moinGeneral = new TagBuilder("div");
-            moinGeneral.AddCssClass("single-products");
+        public static string RenderPartialViewToString(Controller controller, string viewName, object model)
+        {
+            //Sert à afficher la photo, le nom de la categ,.... dans la vue
+            if (string.IsNullOrEmpty(viewName))
+            {
+                viewName = controller.ControllerContext.RouteData.GetRequiredString("action");
+            }
 
-            TagBuilder infoDev = new TagBuilder("div");
-            infoDev.AddCssClass("text-center");
-            infoDev.AddCssClass("productinfo");
+            controller.ViewData.Model = model;
 
-           
-            foreach(Developer dev in lesDev)
-            { 
-                TagBuilder imageDev = new TagBuilder("img");
-                imageDev.Attributes.Add("src", "~/Content/images/home/"+ dev.DevPicture);
-                
-                TagBuilder h2 = new TagBuilder("h2");
-                h2.InnerHtml = dev.DevHourCost.ToString() + "€/Hours";
+            using (var sw = new StringWriter())
+            {
+                // Find the partial view by its name and the current controller context.
+                ViewEngineResult viewResult = ViewEngines.Engines.FindPartialView(controller.ControllerContext, viewName);
 
-                TagBuilder tagP = new TagBuilder("p");
-                tagP.InnerHtml = ;
-            
-                TagBuilder tagA = new TagBuilder("a");
-                tagA.Attributes.Add("href","#");
-                tagA.AddCssClass("add-to-cart");
-                tagA.AddCssClass("btn-default");
-                tagA.AddCssClass("btn");
+                // Create a view context.
+                var viewContext = new ViewContext(controller.ControllerContext, viewResult.View, controller.ViewData, controller.TempData, sw);
 
-                TagBuilder tagI = new TagBuilder("i");
-                tagI.AddCssClass("fa-shopping-cart"); 
-                tagI.AddCssClass("fa"); 
+                // Render the view using the StringWriter object.
+                viewResult.View.Render(viewContext, sw);
 
-                TagBuilder cache = new TagBuilder("div");
-                cache.AddCssClass("product-overlay");
-
-                TagBuilder sousCache = new TagBuilder("div");
-                sousCache.AddCssClass("overlay-content");
-
-                return
-            } 
-
+                return sw.GetStringBuilder().ToString();
+            }
         }
         
 

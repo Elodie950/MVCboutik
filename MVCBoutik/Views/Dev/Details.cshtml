@@ -1,0 +1,106 @@
+﻿@model AdopteUneDev.DAL.Developer
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Developer</h4>
+	<hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.IdDev)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IdDev)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DevName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DevName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DevFirstName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DevFirstName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DevBirthDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DevBirthDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DevPicture)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DevPicture)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DevHourCost)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DevHourCost)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DevDayCost)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DevDayCost)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DevMonthCost)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DevMonthCost)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DevMail)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DevMail)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.NomCategPrincipal)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NomCategPrincipal)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DevCategPrincipal)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DevCategPrincipal)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

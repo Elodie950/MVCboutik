@@ -10,6 +10,7 @@ namespace MVCBoutik.Models
     {
         List<Categories> _lstCateg;
         List<ITLang> _lstLang;
+        List<Developer> _lstDev;
 
         public List<Categories> LstCateg
         {
@@ -21,5 +22,11 @@ namespace MVCBoutik.Models
             get { return _lstLang; }
             set { _lstLang = value; }
         }
+        public List<Developer> LstDev
+        {
+            get { return _lstDev; }
+            set { _lstDev = value; }
+        }
+
     }
 }

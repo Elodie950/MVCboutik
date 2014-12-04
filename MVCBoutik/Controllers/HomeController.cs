@@ -14,10 +14,15 @@ namespace MVCBoutik.Controllers
             // GET: /Home/
             public ActionResult Index()
             {
-                langCategDev maBoite = new langCategDev();
-                maBoite.LstCateg = Categories.getInfosCategs();
-                maBoite.LstLang = ITLang.getInfosItLangs();
-                return View(maBoite);
+                Session["CurrentController"] = this;
+                langCategDev HM = new langCategDev()
+           {
+
+               LstCateg = Categories.getInfosCategs(),
+               LstLang = ITLang.getInfosItLangs(),
+               LstDev = Developer.ChargerTousLesDev(),
+           };
+                return View(HM);
             }
         }
 }
