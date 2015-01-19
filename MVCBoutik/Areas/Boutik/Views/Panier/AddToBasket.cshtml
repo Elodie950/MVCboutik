@@ -1,0 +1,123 @@
+﻿@model IEnumerable<MVCBoutik.Areas.Boutik.Models.Ligne>
+
+@{
+    ViewBag.Title = "AddToBasket";
+}
+
+<section id="cart_items">
+    <div class="container">
+        <div class="table-responsive cart_info">
+            <table class="table table-condensed">
+                <thead>
+                    <tr class="cart_menu">
+                        <td class="image"></td>
+                        <td class="description">Developer</td>
+                        <td class="price">Prix</td>
+                        <td class="quantity">Quantité</td>
+                        <td class="total">Total</td>
+                        <td></td>
+                    </tr>
+                </thead>
+                <tbody>
+
+                    @foreach (var item in Model)
+                    {
+                        Html.RenderPartial("_Ligne", item);
+                        @* <tr>
+                                <td class="cart_product">
+                                    <a href="">
+                                        <img src="~/content/images/home/@Html.DisplayFor(modelItem => item.ZeDave.DevPicture)" alt="" style="width:80px;" />
+                                    </a>
+                                </td>
+                                <td class="cart_description">
+                                    <h4><a href="">@Html.DisplayFor(modelItem => item.ZeDave.DevFirstName) @Html.DisplayFor(modelItem => item.ZeDave.DevName)</a></h4>
+                                    <p>@Html.DisplayFor(modelItem => item.ZeDave.NomCategPrincipal)</p>
+                                </td>
+                                <td class="cart_price">
+                                    <p>@Html.DisplayFor(modelItem => item.ZeDave.DevHourCost)/h</p>
+                                </td>
+                                <td class="cart_quantity">
+                                    <div class="cart_quantity_button">
+                                        <a class="cart_quantity_up" href=""> + </a>
+                                        <input class="cart_quantity_input" type="text" name="quantity" value="@Html.DisplayFor(modelItem => item.Qte)" autocomplete="off" size="2">
+                                        <a class="cart_quantity_down" href=""> - </a>
+                                    </div>
+                                </td>
+                                <td class="cart_total">
+                                    <p class="cart_total_price">@((int)item.Qte * (int)item.ZeDave.DevHourCost) €</p>
+                                </td>
+                                <td class="cart_delete">
+                                    <a class="cart_quantity_delete" href=""><i class="fa fa-times"></i></a>
+                                </td>
+                            </tr>*@
+                    }
+                </tbody>
+            </table>
+            <p>Le montant total s'élève à  </p>
+            <div class="breadcrumbs">
+                <ol class="breadcrumb">
+                    <li><a href="~/Home/Index">Ajouter un nouveau developer</a></li>
+                </ol>
+            </div>
+            <button type="submit" class="btn btn-fefault cart">
+                Valider le panier
+            </button>
+        </div>
+
+    </div>
+
+</section>
+
+@*<h2>AddToBasket</h2>
+
+
+    <table class="table">
+        <tr>
+            <th>
+                Photo
+            </th>
+            <th>
+                Nom du developer
+            </th>
+            <th>
+                Catégorie
+            </th>
+            <th>
+                Nombre d'heure(s)
+            </th>
+            <th>
+                Prix par heure
+            </th>
+            <th>
+                Total
+            </th>
+            <th></th>
+
+        </tr>
+
+    @foreach (var item in Model) {
+        <tr>
+            <td>
+                <img src="~/content/images/home/@Html.DisplayFor(modelItem => item.ZeDave.DevPicture)" alt="" style="width:80px;"/>
+            <td>
+                @Html.DisplayFor(modelItem =>item.ZeDave.DevFirstName) @Html.DisplayFor(modelItem => item.ZeDave.DevName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem =>item.ZeDave.NomCategPrincipal)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Qte)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ZeDave.DevHourCost)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ZeDave.DevHourCost)@Html.DisplayFor(modelItem => item.Qte)
+            </td>
+            <td>
+                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+            </td>
+        </tr>
+    }
+    </table>*@
+

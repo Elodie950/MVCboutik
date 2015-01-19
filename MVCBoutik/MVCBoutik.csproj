@@ -185,7 +185,8 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Areas\Boutik\BoutikAreaRegistration.cs" />
-    <Compile Include="Areas\Boutik\Controllers\ShopController.cs" />
+    <Compile Include="Areas\Boutik\Controllers\PanierController.cs" />
+    <Compile Include="Areas\Boutik\Models\Ligne.cs" />
     <Compile Include="Areas\Membre\Controllers\ClientController.cs" />
     <Compile Include="Areas\Membre\MembreAreaRegistration.cs" />
     <Compile Include="Controllers\DevController.cs" />
@@ -196,6 +197,7 @@
     </Compile>
     <Compile Include="Helper\CustHelper.cs" />
     <Compile Include="Models\langCategDev.cs" />
+    <Compile Include="Models\SessionTools.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\Settings.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -207,20 +209,22 @@
     <Content Include="Views\web.config">
       <SubType>Designer</SubType>
     </Content>
-    <Content Include="packages.config" />
+    <Content Include="Views\packages.config" />
     <Content Include="Fonts\fontawesome-webfont.woff" />
     <Content Include="Fonts\FontAwesome.otf" />
     <Content Include="Fonts\glyphicons-halflings-regular.woff" />
     <Content Include="Areas\Boutik\Views\web.config" />
     <Content Include="Areas\Membre\Views\web.config" />
     <Content Include="Areas\Boutik\Views\_ViewStart.cshtml" />
-    <Content Include="Areas\Boutik\Views\Shared\_Layout.cshtml" />
+    <Content Include="Areas\Boutik\Views\Shared\_Ligne.cshtml" />
+    <Content Include="Areas\Boutik\Views\Panier\AddToBasket.cshtml" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
     <Content Include="Views\Home\_DevDisplay.cshtml" />
     <Content Include="Views\Dev\Details.cshtml" />
+    <Content Include="Views\Shared\_Review.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -230,8 +234,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Areas\Boutik\Models\" />
-    <Folder Include="Areas\Boutik\Views\Shop\" />
     <Folder Include="Areas\Membre\Models\" />
     <Folder Include="Areas\Membre\Views\Client\" />
     <Folder Include="Areas\Membre\Views\Shared\" />

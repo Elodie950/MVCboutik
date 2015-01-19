@@ -11,6 +11,7 @@ namespace MVCBoutik.Models
         List<Categories> _lstCateg;
         List<ITLang> _lstLang;
         List<Developer> _lstDev;
+        Developer _currentDev;
 
         public List<Categories> LstCateg
         {
@@ -26,6 +27,11 @@ namespace MVCBoutik.Models
         {
             get { return _lstDev; }
             set { _lstDev = value; }
+        }
+        public Developer CurrentDev
+        {
+            get { return _currentDev; }
+            set { _currentDev = value; }
         }
 
     }

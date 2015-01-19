@@ -22,6 +22,7 @@ namespace AdopteUneDev.DAL
         private string _NomCategPrincipal;
         private int _devCategPrincipal;
         private List<ITLang> _itLangs;
+        private List<Review> _reviews;
         
         #endregion
 
@@ -98,6 +99,16 @@ namespace AdopteUneDev.DAL
             set { _devCategPrincipal = value; }
         }
 
+        public List<Review> Reviews
+        {
+            get {
+                if (_reviews == null)
+                {
+                    _reviews = ChargerLesReviews();
+                }
+                return _reviews; }
+            set { _reviews = value; }
+        }
         #endregion
 
 
@@ -129,6 +140,11 @@ namespace AdopteUneDev.DAL
             }
             return retour;
         }
+
+         private List<Review> ChargerLesReviews()
+         {
+             return Review.getReviewsFromDev(this.IdDev);
+         }
         /// <summary>
          /// Peremet de récupérer la totalité des développeurs
          /// </summary>
@@ -175,7 +191,7 @@ namespace AdopteUneDev.DAL
                     DevHourCost = (double)item["DevHourCost"],
                     DevMonthCost = (double)item["DevMonthCost"],
                     DevCategPrincipal = (int)item["DevCategPrincipal"],
-                    DevPicture = item["DevPicture"] == null ? "" : item["DevPicture"].ToString()
+                    DevPicture = item["DevPicture"] == null ? "" : item["DevPicture"].ToString(),
                 };
              return dev;
          }

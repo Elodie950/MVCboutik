@@ -1,0 +1,58 @@
+﻿@model MVCBoutik.Areas.Boutik.Models.Ligne
+<tr>
+<td class="cart_product">
+    <a href="">
+        <img src="~/content/images/home/@Model.ZeDave.DevPicture" alt="" style="width:80px;" />
+    </a>
+</td>
+<td class="cart_description">
+    <h4><a href="">@Model.ZeDave.DevFirstName @Model.ZeDave.DevName</a></h4>
+    <p>@Model.ZeDave.NomCategPrincipal</p>
+</td>
+<td class="cart_price">
+    @{
+        if (Model.Choix == "hourCost")
+      {
+               <p>@Model.ZeDave.DevHourCost €/heure</p>
+      }
+      else if (Model.Choix == "dayCost")
+      {
+                <p>@Model.ZeDave.DevDayCost €/jour</p>
+      }
+      else
+      {
+                <p>@Model.ZeDave.DevMonthCost €/mois</p> 
+      }
+          }
+</td>
+<td class="cart_quantity">
+    <div class="cart_quantity_button">
+        <a class="cart_quantity_up" href=""> + </a>
+        <input class="cart_quantity_input" type="text" name="quantity" value="@Model.Qte" autocomplete="off" size="2">
+        <a class="cart_quantity_down" href=""> - </a>
+    </div>
+</td>
+<td class="cart_total">
+    <p class="cart_total_price">
+    @{ 
+        if (Model.Choix == "hourCost")
+      {
+        @((int)Model.Qte * (int)Model.ZeDave.DevHourCost)
+      }
+      else if (Model.Choix == "dayCost")
+      {
+        @((int)Model.Qte * (int)Model.ZeDave.DevDayCost)
+      }
+      else
+      {
+        @((int)Model.Qte * (int)Model.ZeDave.DevMonthCost)
+      }
+    } €
+</td>
+<td class="cart_delete">
+    <form method="post" action="~/Boutik/Panier/SupLigne" class="cart_quantity_delete">
+        <input type="hidden" value="@Model.ZeDave.IdDev" name="id"/>
+        <input type="submit" value="delete"/>
+    </form>
+</td>
+    </tr>

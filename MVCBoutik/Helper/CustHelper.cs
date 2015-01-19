@@ -155,6 +155,7 @@ namespace MVCBoutik.Helper
             return new MvcHtmlString(returnStr); ;
         }
 
+
         public static string RenderPartialViewToString(Controller controller, string viewName, object model)
         {
             //Sert à afficher la photo, le nom de la categ,.... dans la vue
@@ -179,7 +180,33 @@ namespace MVCBoutik.Helper
                 return sw.GetStringBuilder().ToString();
             }
         }
-        
+
+        public static MvcHtmlString TagCloud(this HtmlHelper origin, Developer dev)
+        {
+            List<string> nuage = new List<string>();
+            //Je mets tout dans une liste de string
+            //je récupère les langages de notre dev
+            List<ITLang> langs = ITLang.getInfosItLangs()
+                .Where(l => l.Developer.Where(d => d.IdDev
+                    == dev.IdDev).Count() > 0).ToList();
+
+            foreach (ITLang item in langs)
+            {
+                nuage.Add(item.ITLabel);
+            }
+
+            //TODO : add css and struct to create tag cloud
+            TagBuilder ta = new TagBuilder("p");
+            foreach (string item in nuage)
+            {
+                TagBuilder tli = new TagBuilder("p");
+                tli.InnerHtml = item;
+                ta.InnerHtml += tli.ToString();
+            }
+            return new MvcHtmlString(ta.ToString());
+	        
+            
+        }
 
     }
 }

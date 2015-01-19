@@ -1,0 +1,29 @@
+﻿@model IEnumerable<AdopteUneDev.DAL.Review>
+
+<div class="col-sm-12">
+
+    @foreach (AdopteUneDev.DAL.Review r in Model)
+    {
+        <ul>
+            <li><a href=""><i class="fa fa-user">@r.Name</i></a></li>
+            <li><a href=""><i class="fa fa-clock-o"></i>@r.ReviewDate.ToShortTimeString()</a></li>
+            <li><a href=""><i class="fa fa-calendar-o"></i>@r.ReviewDate.ToShortDateString()</a></li>
+        </ul>
+        <p>@r.Comment</p>
+    }
+
+    <p><b>Ecrivez votre commentaire</b></p>
+
+    <form action="/Dev/PostReview" method="post">
+        <span>
+            <input type="text" placeholder="Votre nom" name="txtName" />
+            <input type="email" placeholder="Votre adresse e-mail" name="txtMail" />
+            <input type="hidden" name="id" value='@ViewContext.RouteData.Values["id"]' /> @*permet d'aller chercher l'id dans l'url*@
+        </span>
+        <textarea name="txtText"></textarea>
+        <b>Rating: </b> <img src="images/product-details/rating.png" alt="" />
+        <button type="submit" class="btn btn-default pull-right">
+            Envoyer
+        </button>
+    </form>
+</div>
