@@ -95,9 +95,19 @@
                             <ul class="nav navbar-nav">
                                 <li><a href="#"><i class="fa fa-user"></i> Account</a></li>
                                 <li><a href="#"><i class="fa fa-star"></i> Wishlist</a></li>
-                                <li><a href="checkout.html"><i class="fa fa-crosshairs"></i> Checkout</a></li>
-                                <li><a href="~/Boutik/Panier/AddToBasket"><i class="fa fa-shopping-cart"></i> Cart</a></li>
-                                <li><a href="login.html"><i class="fa fa-lock"></i> Login</a></li>
+                                <li><a href="~/Boutik/Panier/ConfirmerPanier"><i class="fa fa-crosshairs"></i> Checkout</a></li>
+                                <li><a href="~/Boutik/Panier/Index"><i class="fa fa-shopping-cart"></i> Cart</a></li>
+                                <li><a href="~/Membre/Client/SeLogger"><i class="fa fa-lock"></i> 
+
+                                    @if (Session["login"] == null)
+                                    {
+                                        <a href="/Membre/Client/SeLogger">Se connecter</a>
+                                    }
+                                    else
+                                    {
+                                        <a href="/Membre/Client/Logoff" >Bienvenue @Session["login"]</a>
+                                    }
+                                    </a></li>
                             </ul>
                         </div>
                     </div>

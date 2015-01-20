@@ -11,11 +11,11 @@
 </td>
 <td class="cart_price">
     @{
-        if (Model.Choix == "hourCost")
+        if (Model.Choix == Model.ZeDave.DevHourCost)
       {
                <p>@Model.ZeDave.DevHourCost €/heure</p>
       }
-      else if (Model.Choix == "dayCost")
+        else if (Model.Choix == Model.ZeDave.DevDayCost)
       {
                 <p>@Model.ZeDave.DevDayCost €/jour</p>
       }
@@ -27,27 +27,30 @@
 </td>
 <td class="cart_quantity">
     <div class="cart_quantity_button">
-        <a class="cart_quantity_up" href=""> + </a>
+        @Html.ActionLink("+", "AddToBasket", "Panier", new { area = "Boutik", id= @Model.ZeDave.IdDev, qte = 1, op = true }, null)
         <input class="cart_quantity_input" type="text" name="quantity" value="@Model.Qte" autocomplete="off" size="2">
-        <a class="cart_quantity_down" href=""> - </a>
+        @Html.ActionLink("-", "AddToBasket", "Panier", new { area = "Boutik", id = @Model.ZeDave.IdDev, qte = 1, op = false }, null)
     </div>
 </td>
 <td class="cart_total">
     <p class="cart_total_price">
     @{ 
-        if (Model.Choix == "hourCost")
+        int price;
+        if (Model.Choix == Model.ZeDave.DevHourCost)
       {
-        @((int)Model.Qte * (int)Model.ZeDave.DevHourCost)
+
+          price = (int)Model.Qte * (int)Model.ZeDave.DevHourCost;
       }
-      else if (Model.Choix == "dayCost")
+        else if (Model.Choix == Model.ZeDave.DevDayCost)
       {
-        @((int)Model.Qte * (int)Model.ZeDave.DevDayCost)
+          price = (int)Model.Qte * (int)Model.ZeDave.DevDayCost;
       }
       else
       {
-        @((int)Model.Qte * (int)Model.ZeDave.DevMonthCost)
+          price = (int)Model.Qte * (int)Model.ZeDave.DevMonthCost;
       }
-    } €
+    } 
+        @price €
 </td>
 <td class="cart_delete">
     <form method="post" action="~/Boutik/Panier/SupLigne" class="cart_quantity_delete">

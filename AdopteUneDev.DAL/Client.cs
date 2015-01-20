@@ -15,6 +15,8 @@ namespace AdopteUneDev.DAL
         private string _cliFirstName;
         private string _cliMail;
         private string _cliCompany;
+        private string _cliLogin;
+        private string _cliPassword;
         #endregion 
 
         #region Proprieties
@@ -43,19 +45,31 @@ namespace AdopteUneDev.DAL
             get { return _cliCompany; }
             set { _cliCompany = value; }
         }
+        public string CliLogin
+        {
+            get { return _cliLogin; }
+            set { _cliLogin = value; }
+        }
+        public string CliPassword
+        {
+            get { return _cliPassword; }
+            set { _cliPassword = value; }
+        }
         #endregion
 
         #region Constructor
         public Client()
         { 
         }
-        public Client(int idClient, string cliName, string cliFirstName, string cliMail, string cliCompany) 
+        public Client(int idClient, string cliName, string cliFirstName, string cliMail, string cliCompany, string cliLogin, string cliPassword) 
         {
             this.IdClient = idClient;
             this.CliName = cliName;
             this.CliFirstName = cliFirstName;
             this.CliMail = cliMail;
             this.CliCompany = cliCompany;
+            this.CliLogin = cliLogin;
+            this.CliPassword = cliPassword;
 
         }
         #endregion
@@ -71,6 +85,8 @@ namespace AdopteUneDev.DAL
                 c.CliFirstName = infoClient[0]["CliFirstName"].ToString();
                 c.CliMail = infoClient[0]["CliMail"].ToString();
                 c.CliCompany = infoClient[0]["CliCompany"].ToString();
+                c.CliLogin = infoClient[0]["CliLogin"].ToString();
+                c.CliPassword = infoClient[0]["CliPassword"].ToString();
 
             return c;
           
@@ -91,7 +107,7 @@ namespace AdopteUneDev.DAL
 
                 query = @"INSERT INTO [AdopteUneDev].[dbo].[Client]
             VALUES
-           (@idClient,@CliName,@CliFirstName, @CliMail, @CliCompany)";
+           (@idClient,@CliName,@CliFirstName, @CliMail, @CliCompany , @CliLogin, @CliPassword)";
 
             }
             else
@@ -101,6 +117,8 @@ namespace AdopteUneDev.DAL
                                             [CliFirstName] = @CliFirstName,
                                             [CliMail] = @CliMail,
                                             [CliCompany] = @CliCompany,
+                                            [CliLogin] = @CliLogin,
+                                            [CliPassword] = @CliPassword,
                                             WHERE [idClient] = @idClient";
             }
 
@@ -110,6 +128,8 @@ namespace AdopteUneDev.DAL
             valeurs.Add("CliFirstName", this.CliFirstName);
             valeurs.Add("CliMail", this.CliMail);
             valeurs.Add("CliCompany", this.CliCompany);
+            valeurs.Add("CliLogin", this.CliLogin);
+            valeurs.Add("CliPassword", this.CliPassword);
             if (GestionConnexion.Instance.saveData(query, GenerateKey.APP, valeurs))
             {
                 return true;
@@ -133,9 +153,47 @@ namespace AdopteUneDev.DAL
                 c.CliFirstName = item["CliFirstName"].ToString();
                 c.CliMail = item["CliMail"].ToString();
                 c.CliCompany = item["CliCompany"].ToString();
+                c.CliLogin = item["CliLogin"].ToString();
+                c.CliPassword = item["CliPassword"].ToString();
                 retour.Add(c);
             }
             return retour;
+        }
+
+        public static Client AuthentifieMoi(string login, string password)
+        {
+            List<Dictionary<string, object>> infoClient = GestionConnexion.Instance.getData("Select * from Client where CliLogin='" + login + "' and CliPassword='" + password + "'");
+            Client retour = null;
+            if (infoClient.Count > 0)
+            {
+                int idClient = (int)infoClient[0]["idClient"];
+                retour = Client.getInfo(idClient);
+            }
+            return retour;
+        }
+       
+
+        public virtual bool InsererClient(string txtName, string CliFirstName, string CliMail, string CliCompany, string CliLogin, string CliPassword)
+        {
+            string query = "INSERT INTO Client (CliName, CliFirstName, CliMail, CliCompany, CliLogin, CliPassword) VALUES ( @txtName,@CliFirstName, @CliMail, @CliCompany , @CliLogin, @CliPassword)";
+
+            Dictionary<string, object> valeurs = new Dictionary<string, object>();
+            valeurs.Add("txtName", txtName);
+            valeurs.Add("CliFirstName", CliFirstName);
+            valeurs.Add("CliMail", CliMail);
+            valeurs.Add("CliCompany", CliCompany);
+            valeurs.Add("CliLogin", CliLogin);
+            valeurs.Add("CliPassword", CliPassword);
+
+            if (GestionConnexion.Instance.saveData(query, GenerateKey.APP, valeurs))
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+
         }
         #endregion
     }

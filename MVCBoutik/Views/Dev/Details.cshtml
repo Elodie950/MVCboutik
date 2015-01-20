@@ -202,9 +202,9 @@
                                 <form method="post" action="~/Boutik/Panier/AddToBasket">
                                     <span>
                                         <select name="choix">
-                                                <option value="hourCost" >@Model.CurrentDev.DevHourCost €/heure</option>
-                                                <option value="dayCost" >@Model.CurrentDev.DevDayCost €/jour</option>
-                                                <option value="monthCost">@Model.CurrentDev.DevMonthCost €/mois</option>
+                                            <option value="@Model.CurrentDev.DevHourCost">@Model.CurrentDev.DevHourCost €/heure</option>
+                                            <option value="@Model.CurrentDev.DevDayCost">@Model.CurrentDev.DevDayCost €/jour</option>
+                                            <option value="@Model.CurrentDev.DevMonthCost">@Model.CurrentDev.DevMonthCost €/mois</option>
                                             </select>
                                         <br />
                                         <label>Quantity:</label>

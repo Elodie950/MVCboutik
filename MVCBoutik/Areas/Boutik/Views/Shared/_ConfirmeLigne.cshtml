@@ -1,0 +1,39 @@
+﻿@model MVCBoutik.Areas.Boutik.Models.Ligne
+<tr>
+    <td class="cart_product">
+        <a href="">
+            <img src="~/content/images/home/@Model.ZeDave.DevPicture" alt="" style="width:80px;" />
+        </a>
+    </td>
+    <td class="cart_description">
+        <h4><a href="">@Model.ZeDave.DevFirstName @Model.ZeDave.DevName</a></h4>
+        <p>@Model.ZeDave.NomCategPrincipal</p>
+    </td>
+    <td class="cart_price">
+        @{
+            if (Model.Choix == Model.ZeDave.DevHourCost)
+            {
+                <p>@Model.ZeDave.DevHourCost €/heure</p>
+            }
+            else if (Model.Choix == Model.ZeDave.DevDayCost)
+            {
+                <p>@Model.ZeDave.DevDayCost €/jour</p>
+            }
+            else
+            {
+                <p>@Model.ZeDave.DevMonthCost €/mois</p>
+            }
+        }
+    </td>
+    <td class="cart_quantity">
+            @Model.Qte
+        
+    </td>
+    <td class="cart_total">
+        <p class="cart_total_price">
+            @{
+                int price = (int)Model.Qte * (int)Model.Choix;
+            }
+            @price €
+    </td>
+</tr>

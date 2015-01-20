@@ -11,7 +11,7 @@ namespace MVCBoutik.Areas.Boutik.Models
 
         private Developer _zeDave;
         private int _qte;
-        private string _choix;
+        private int _choix;
 
         public Developer ZeDave
         {
@@ -23,7 +23,7 @@ namespace MVCBoutik.Areas.Boutik.Models
             get { return _qte; }
             set { _qte = value; }
         }
-        public string Choix
+        public int Choix
         {
             get { return _choix; }
             set { _choix = value; }

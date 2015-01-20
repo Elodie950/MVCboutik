@@ -1,0 +1,45 @@
+﻿@model AdopteUneDev.DAL.Client
+
+@{
+    ViewBag.Title = "SeLogger";
+}
+
+<section id="form">
+    <!--form-->
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-4 col-sm-offset-1">
+                <div class="login-form">
+                    <!--login form-->
+                    <h2>Déjà membre? Connectez-vous</h2>
+                    <form action="~/Membre/Client/SeLogger" method="post">
+                        <input type="text" placeholder="Login" name="txtLogin" />
+                        <input type="password" placeholder="Password" name="txtPassword" />
+                        <span>
+                            <input type="checkbox" class="checkbox">
+                            Rester connecté
+                        </span>
+                        <button type="submit" class="btn btn-default">Se connecter</button>
+                    </form>
+                </div><!--/login form-->
+            </div>
+            <div class="col-sm-1">
+                <h2 class="or">OU</h2>
+            </div>
+            <div class="col-sm-4">
+                <div class="signup-form">
+                    <!--sign up form-->
+                    <h2>Nouvel utilisateur? Inscrivez-vous!</h2>
+                    <form action="~/Membre/Client/Inscription" method="post">
+                        <input type="text" placeholder="Nom" name="txtnom" />
+                        <input type="text" placeholder="Prenom" name="txtprenom"/>
+                        <input type="email" placeholder="Adresse e-mail" name="txtemail"/>
+                        <button type="submit" class="btn btn-default">S'inscrire</button>
+                    </form>
+                </div><!--/sign up form-->
+            </div>
+        </div>
+    </div>
+</section><!--/form-->
+
+

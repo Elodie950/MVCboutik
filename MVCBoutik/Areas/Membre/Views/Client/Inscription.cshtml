@@ -1,0 +1,29 @@
+﻿@model MVCBoutik.Areas.Boutik.Models.logger
+
+@{
+    ViewBag.Title = "Inscription";
+}
+
+<section id="form">
+    <!--form-->
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-4">
+                <div class="signup-form">
+                    <!--sign up form-->
+                    <h2>Complètez votre inscription</h2>
+                    <form action="~/Membre/Client/InscriptionFin" method="post">
+                        <input type="text" value="@Model.Name" name="txtName" />
+                        <input type="text" value="@Model.FirstName" name="CliFirstName" />
+                        <input type="email" value="@Model.Email" name="CliMail" />
+                        <input type="text" placeholder="Société" name="CliCompany" />
+                        <input type="text" placeholder="Login" name="CliLogin" />
+                        <input type="password" placeholder="Password" name="CliPassword" />
+                        <button type="submit" class="btn btn-default">Valider</button>
+                    </form>
+                </div><!--/sign up form-->
+            </div>
+
+        </div>
+    </div>
+</section><!--/form-->

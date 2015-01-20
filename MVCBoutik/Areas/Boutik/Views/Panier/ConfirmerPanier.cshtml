@@ -1,0 +1,116 @@
+﻿@model MVCBoutik.Models.panierClient
+
+<section id="cart_items">
+    <div class="container">
+        <div class="shopper-informations">
+            <div class="row">
+                <div class="col-sm-3">
+                    <div class="shopper-info">
+                        <p>Information client</p>
+                        <ul>
+                            <li>@Model.ClientCourant.CliName @Model.ClientCourant.CliFirstName</li>
+                            <li>@Model.ClientCourant.CliCompany</li>
+                            <li>@Model.ClientCourant.CliMail</li>
+                    </ul>
+                      
+                    </div>
+                </div>
+                <div class="col-sm-5 clearfix">
+                    <div class="bill-to">
+                        <p>Facturer au nom de</p>
+                        <div class="form-one">
+                            <form>
+                                <input type="text" placeholder="Nom de la société">
+                                <input type="text" placeholder="Adresse e-mail*">
+                                <input type="text" placeholder="Titre">
+                                <input type="text" placeholder="Nom *">
+                                <input type="text" placeholder="Prenom *">
+                                <input type="text" placeholder="Adresse *">
+                            </form>
+                        </div>
+                        <div class="form-two">
+                            <form>
+                                <input type="text" placeholder="Code postal *">
+                                <select>
+                                    <option>-- Pays --</option>
+                                    <option>Belgique</option>
+                                    <option>France</option>
+                                    <option>UK</option>
+                                    <option>Allemagne</option>
+                                    <option>Hollande</option>
+                                    <option>Suisse</option>
+                                    <option>Italie</option>
+                                    <option>Espagne</option>
+                                </select>
+                                <input type="password" placeholder="Confirmer votre mot de passe">
+                                <input type="text" placeholder="Numero de GSM *">
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+
+<section id="cart_items">
+    <div class="container">
+        <div class="table-responsive cart_info">
+            <table class="table table-condensed">
+                <thead>
+                    <tr class="cart_menu">
+                        <td class="image"></td>
+                        <td class="description">Developer</td>
+                        <td class="price">Prix</td>
+                        <td class="quantity">Quantité</td>
+                        <td class="total">Total</td>
+                        <td></td>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model.PanierCourant.Lignes)
+                    {
+                        Html.RenderPartial("_ConfirmeLigne", item);
+                    }
+
+                </tbody>
+            </table>
+            <section id="do_action">
+                <div class="container">
+                    <div class="heading">
+                        <h3>Validez votre commande</h3>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="total_area">
+                                <ul>
+                                    <li>Total HTVA<span>@Model.PanierCourant.Total €</span></li>
+                                    <li>TVA <span>+ 21%</span></li>
+                                    <li>
+                                        Total TVAC<span>
+                                            @{
+                                                double tot = @Model.PanierCourant.Total * 21;
+                                                double totglobal = (tot / 100) + @Model.PanierCourant.Total;
+                                            }
+                                            @totglobal €
+                                        </span>
+                                    </li>
+                                </ul>
+                                <a class="btn btn-default check_out" href="~/Boutik/Panier/ConfirmerPanier">Valider</a>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+            </section>
+        </div>
+    </div>
+</section>
+
+
+
+
+

@@ -1,4 +1,4 @@
-﻿@model IEnumerable<MVCBoutik.Areas.Boutik.Models.Ligne>
+﻿@model MVCBoutik.Areas.Boutik.Models.Panier
 
 @{
     ViewBag.Title = "AddToBasket";
@@ -20,104 +20,73 @@
                 </thead>
                 <tbody>
 
-                    @foreach (var item in Model)
+                    @foreach (var item in Model.Lignes)
                     {
                         Html.RenderPartial("_Ligne", item);
                         @* <tr>
-                                <td class="cart_product">
-                                    <a href="">
-                                        <img src="~/content/images/home/@Html.DisplayFor(modelItem => item.ZeDave.DevPicture)" alt="" style="width:80px;" />
-                                    </a>
-                                </td>
-                                <td class="cart_description">
-                                    <h4><a href="">@Html.DisplayFor(modelItem => item.ZeDave.DevFirstName) @Html.DisplayFor(modelItem => item.ZeDave.DevName)</a></h4>
-                                    <p>@Html.DisplayFor(modelItem => item.ZeDave.NomCategPrincipal)</p>
-                                </td>
-                                <td class="cart_price">
-                                    <p>@Html.DisplayFor(modelItem => item.ZeDave.DevHourCost)/h</p>
-                                </td>
-                                <td class="cart_quantity">
-                                    <div class="cart_quantity_button">
-                                        <a class="cart_quantity_up" href=""> + </a>
-                                        <input class="cart_quantity_input" type="text" name="quantity" value="@Html.DisplayFor(modelItem => item.Qte)" autocomplete="off" size="2">
-                                        <a class="cart_quantity_down" href=""> - </a>
-                                    </div>
-                                </td>
-                                <td class="cart_total">
-                                    <p class="cart_total_price">@((int)item.Qte * (int)item.ZeDave.DevHourCost) €</p>
-                                </td>
-                                <td class="cart_delete">
-                                    <a class="cart_quantity_delete" href=""><i class="fa fa-times"></i></a>
-                                </td>
-                            </tr>*@
+                            <td class="cart_product">
+                                <a href="">
+                                    <img src="~/content/images/home/@Html.DisplayFor(modelItem => item.ZeDave.DevPicture)" alt="" style="width:80px;" />
+                                </a>
+                            </td>
+                            <td class="cart_description">
+                                <h4><a href="">@Html.DisplayFor(modelItem => item.ZeDave.DevFirstName) @Html.DisplayFor(modelItem => item.ZeDave.DevName)</a></h4>
+                                <p>@Html.DisplayFor(modelItem => item.ZeDave.NomCategPrincipal)</p>
+                            </td>
+                            <td class="cart_price">
+                                <p>@Html.DisplayFor(modelItem => item.ZeDave.DevHourCost)/h</p>
+                            </td>
+                            <td class="cart_quantity">
+                                <div class="cart_quantity_button">
+                                    <a class="cart_quantity_up" href=""> + </a>
+                                    <input class="cart_quantity_input" type="text" name="quantity" value="@Html.DisplayFor(modelItem => item.Qte)" autocomplete="off" size="2">
+                                    <a class="cart_quantity_down" href=""> - </a>
+                                </div>
+                            </td>
+                            <td class="cart_total">
+                                <p class="cart_total_price">@((int)item.Qte * (int)item.ZeDave.DevHourCost) €</p>
+                            </td>
+                            <td class="cart_delete">
+                                <a class="cart_quantity_delete" href=""><i class="fa fa-times"></i></a>
+                            </td>
+                        </tr>*@
                     }
                 </tbody>
             </table>
-            <p>Le montant total s'élève à  </p>
-            <div class="breadcrumbs">
-                <ol class="breadcrumb">
-                    <li><a href="~/Home/Index">Ajouter un nouveau developer</a></li>
-                </ol>
+            <section id="do_action">
+                <div class="container">
+                    <div class="heading">
+                        <h3>Que voulez-vous faire maintenant?</h3>
+                        <p>Valider votre panier ou rajouter un nouveau developer?</p>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="total_area">
+                                <ul>
+                                    <li>Total HTVA<span>@Model.Total €</span></li>
+                                    <li>TVA <span>+ 21%</span></li>
+                                    <li>
+                                        Total TVAC<span>
+                                            @{
+                                            double tot = @Model.Total * 21;
+                                            double totglobal = (tot / 100) + @Model.Total;
+                                        }
+                                        @totglobal €
+                                    </span>
+                                </li>
+                            </ul>
+                            <a class="btn btn-default update" href="~/Home/Index">Ajouter un nouveau developer</a>
+                            <a class="btn btn-default check_out" href="~/Boutik/Panier/ConfirmerPanier">Valider le panier</a>
+                        </div>
+                    </div>
+
+                </div>
+
             </div>
-            <button type="submit" class="btn btn-fefault cart">
-                Valider le panier
-            </button>
+                </section>
+            </div>
         </div>
-
-    </div>
-
-</section>
-
-@*<h2>AddToBasket</h2>
+        </section>
 
 
-    <table class="table">
-        <tr>
-            <th>
-                Photo
-            </th>
-            <th>
-                Nom du developer
-            </th>
-            <th>
-                Catégorie
-            </th>
-            <th>
-                Nombre d'heure(s)
-            </th>
-            <th>
-                Prix par heure
-            </th>
-            <th>
-                Total
-            </th>
-            <th></th>
-
-        </tr>
-
-    @foreach (var item in Model) {
-        <tr>
-            <td>
-                <img src="~/content/images/home/@Html.DisplayFor(modelItem => item.ZeDave.DevPicture)" alt="" style="width:80px;"/>
-            <td>
-                @Html.DisplayFor(modelItem =>item.ZeDave.DevFirstName) @Html.DisplayFor(modelItem => item.ZeDave.DevName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem =>item.ZeDave.NomCategPrincipal)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Qte)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ZeDave.DevHourCost)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ZeDave.DevHourCost)@Html.DisplayFor(modelItem => item.Qte)
-            </td>
-            <td>
-                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
-            </td>
-        </tr>
-    }
-    </table>*@
 
