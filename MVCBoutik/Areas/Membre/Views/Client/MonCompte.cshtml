@@ -1,0 +1,25 @@
+﻿@model AdopteUneDev.DAL.Client
+
+@{
+    ViewBag.Title = "MonCompte";
+}
+
+<section id="cart_items">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-4">
+                <div class="signup-form">
+                    <h4>Les informations de mon compte</h4>
+                    <p>Nom : @Model.CliName</p>
+                    <p>Prénom : @Model.CliFirstName</p>
+                    <p>Société : @Model.CliCompany</p>
+                    <p>Mail : @Model.CliMail</p>
+                    <p>Mon login : @Model.CliLogin</p>
+                    <p>Mon password : @Model.CliPassword</p>
+                    @Html.ActionLink("Modifier", "Modifier", new { area = "Membre", controller="Client", id = Model.IdClient})
+                    </div>
+                </div>
+            </div>
+       </div>
+</section>
+

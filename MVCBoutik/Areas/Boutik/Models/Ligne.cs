@@ -12,6 +12,7 @@ namespace MVCBoutik.Areas.Boutik.Models
         private Developer _zeDave;
         private int _qte;
         private int _choix;
+        private DateTime _dateDebut;
 
         public Developer ZeDave
         {
@@ -27,6 +28,11 @@ namespace MVCBoutik.Areas.Boutik.Models
         {
             get { return _choix; }
             set { _choix = value; }
+        }
+        public DateTime DateDebut
+        {
+            get { return _dateDebut; }
+            set { _dateDebut = value; }
         }
     
     }

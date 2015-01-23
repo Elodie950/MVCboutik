@@ -24,5 +24,15 @@ namespace MVCBoutik.Controllers
            };
                 return View(HM);
             }
-        }
+
+            public ActionResult NousContacter()
+            {
+
+                return View();
+            }
+            public ActionResult pageErreur()
+            {
+                return View();
+            }
+    }
 }

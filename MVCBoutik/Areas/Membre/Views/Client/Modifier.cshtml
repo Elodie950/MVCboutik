@@ -1,0 +1,109 @@
+﻿@model AdopteUneDev.DAL.Client
+
+@{
+    ViewBag.Title = "Modifier";
+}
+
+@*<section id="form">
+    <!--form-->
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-4">
+                <div class="signup-form">
+                    <!--sign up form-->
+                    <h2>Complètez votre inscription</h2>
+                    <form action="~/Membre/Client/InscriptionFin" method="post">
+                        <input type="text" value="@Model.Name" name="txtName" />
+                        <input type="text" value="@Model.FirstName" name="CliFirstName" />
+                        <input type="email" value="@Model.Email" name="CliMail" />
+                        <input type="text" placeholder="Société" name="CliCompany" />
+                        <input type="text" placeholder="Login" name="CliLogin" />
+                        <input type="password" placeholder="Password" name="CliPassword" />
+                        <button type="submit" class="btn btn-default">Valider</button>
+                    </form>
+                </div><!--/sign up form-->
+            </div>
+
+        </div>
+    </div>
+</section><!--/form-->*@
+
+<section id="form">
+    <!--form-->
+    <div class="container">
+        <div class="row">
+
+                @using (Html.BeginForm())
+                {
+                    @Html.AntiForgeryToken()
+
+                    <div class="form-horizontal">
+                        <h4>Modifier vos données</h4>
+                        <hr />
+                        @Html.ValidationSummary(true)
+
+                        <div class="form-group">
+
+                            <div class="col-md-10">
+                                <input type="hidden" value="@Model.IdClient" name="IdClient" />
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <p class="control-label col-md-2">Nom </p>
+                            <div class="col-md-10">
+                                @Html.EditorFor(model => model.CliName)
+                                @Html.ValidationMessageFor(model => model.CliName)
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <p class="control-label col-md-2">Prenom </p>
+                            <div class="col-md-10">
+                                @Html.EditorFor(model => model.CliFirstName)
+                                @Html.ValidationMessageFor(model => model.CliFirstName)
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <p class="control-label col-md-2">Adresse e-mail </p>
+                            <div class="col-md-10">
+                                @Html.EditorFor(model => model.CliMail)
+                                @Html.ValidationMessageFor(model => model.CliMail)
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <p class="control-label col-md-2">Nom de la société </p>
+                            <div class="col-md-10">
+                                @Html.EditorFor(model => model.CliCompany)
+                                @Html.ValidationMessageFor(model => model.CliCompany)
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <p class="control-label col-md-2">Login </p>
+                            <div class="col-md-10">
+                                @Html.EditorFor(model => model.CliLogin)
+                                @Html.ValidationMessageFor(model => model.CliLogin)
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <p class="control-label col-md-2">Mot de passe </p>
+                            <div class="col-md-10">
+                                @Html.EditorFor(model => model.CliPassword)
+                                @Html.ValidationMessageFor(model => model.CliPassword)
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="col-md-offset-2 col-md-10">
+                                <input type="submit" value="Save" class="btn btn-default" />
+                            </div>
+                        </div>
+                    </div>
+                }
+        </div>
+    </div>
+</section><!--/form-->

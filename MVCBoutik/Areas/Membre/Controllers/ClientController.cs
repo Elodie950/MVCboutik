@@ -65,5 +65,41 @@ namespace MVCBoutik.Areas.Membre.Controllers
 
 
         }
+    
+
+        public ActionResult MonCompte()
+        {
+            if (SessionTools.Login == null)
+            {
+                return View("SeLogger");
+            }
+            else
+            {
+                Client c = SessionTools.client;
+                return View(c);
+            }
+        }
+
+        //[HttpGet]
+        //public ActionResult ModifierClient(int id )
+        //{
+        //    Client c = Client.getInfo(id);
+        //    return View(c);
+        //}
+        [HttpGet]
+        public ActionResult Modifier(int id)
+        {
+            Client c = Client.getInfo(id);
+            return View(c);
+        }
+
+        [HttpPost]
+        public ActionResult Modifier(Client c)
+        {
+            c.ModifClient();
+            SessionTools.client = c;
+            SessionTools.Login = c.CliLogin;
+            return View("MonCompte",SessionTools.client);
+        }
 	}
 }

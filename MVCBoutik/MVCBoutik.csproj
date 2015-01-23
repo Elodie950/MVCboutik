@@ -226,6 +226,8 @@
     <Content Include="Areas\Membre\Views\Client\Inscription.cshtml" />
     <Content Include="Areas\Boutik\Views\Shared\_ConfirmeLigne.cshtml" />
     <Content Include="Areas\Boutik\Views\Panier\ConfirmerPanier.cshtml" />
+    <Content Include="Areas\Membre\Views\Client\MonCompte.cshtml" />
+    <Content Include="Areas\Membre\Views\Client\Modifier.cshtml" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -233,6 +235,8 @@
     <Content Include="Views\Home\_DevDisplay.cshtml" />
     <Content Include="Views\Dev\Details.cshtml" />
     <Content Include="Views\Shared\_Review.cshtml" />
+    <Content Include="Views\Home\NousContacter.cshtml" />
+    <Content Include="Views\Home\pageErreur.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

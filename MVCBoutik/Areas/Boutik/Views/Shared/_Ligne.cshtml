@@ -32,6 +32,9 @@
         @Html.ActionLink("-", "AddToBasket", "Panier", new { area = "Boutik", id = @Model.ZeDave.IdDev, qte = 1, op = false }, null)
     </div>
 </td>
+    <td>
+        <p>@Model.DateDebut.ToShortDateString() </p>
+    </td>
 <td class="cart_total">
     <p class="cart_total_price">
     @{ 

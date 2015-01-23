@@ -16,7 +16,7 @@ namespace MVCBoutik.Controllers
         {
             return View();
         }
-
+        
         public ActionResult Details(int id)
         {
             Session["CurrentController"] = this;

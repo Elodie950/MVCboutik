@@ -136,19 +136,19 @@
                             </div>*@
                         </div><!--/brands_products-->
 
-                        <div class="price-range">
+                        @*<div class="price-range">
                             <!--price-range-->
                             <h2>Price Range</h2>
                             <div class="well">
                                 <input type="text" class="span2" value="" data-slider-min="0" data-slider-max="600" data-slider-step="5" data-slider-value="[250,450]" id="sl2"><br />
-                                <b>$ 0</b> <b class="pull-right">$ 600</b>
+                                <b>€ 0</b> <b class="pull-right">€ 600</b>
                             </div>
                         </div><!--/price-range-->
 
                         <div class="shipping text-center">
                             <!--shipping-->
                             <img src="images/home/shipping.jpg" alt="" />
-                        </div><!--/shipping-->
+                        </div><!--/shipping-->*@
 
                     </div>
                 </div>
@@ -159,7 +159,7 @@
                         <div class="col-sm-5">
                             <div class="view-product">
                                 <img src="~/content/images/home/@Model.CurrentDev.DevPicture" alt="" />
-                                <h3>ZOOM</h3>
+                                @*<h3>ZOOM</h3>*@
                             </div>
                             <div id="similar-product" class="carousel slide" data-ride="carousel">
 
@@ -210,6 +210,9 @@
                                         <label>Quantity:</label>
                                         <input type="number" value="1" name="qte"/>
                                         <br />
+                                        <label>Date de début</label>
+                                        <input type="date" name="dateDebut" value="@DateTime.Now.ToShortDateString()" style="width:200px;" />
+                                        <br/>
                                         <input type="hidden" value="@Model.CurrentDev.IdDev" name="dev"/>
                                         <button type="submit" class="btn btn-fefault cart">
                                             <i class="fa fa-shopping-cart"></i>
@@ -249,9 +252,9 @@
                         <div class="col-sm-12">
                             <ul class="nav nav-tabs">
                                 <li><a href="#details" data-toggle="tab">Details</a></li>
-                                <li><a href="#companyprofile" data-toggle="tab">Company Profile</a></li>
+                                @*<li><a href="#companyprofile" data-toggle="tab">Company Profile</a></li>*@
                                 <li><a href="#tag" data-toggle="tab">Tag</a></li>
-                                <li class="active"><a href="#reviews" data-toggle="tab">Reviews (5)</a></li>
+                                <li class="active"><a href="#reviews" data-toggle="tab">Reviews </a></li>
                             </ul>
                         </div>
                    
@@ -309,7 +312,7 @@
     </div>*@
                             </div>
                            
-                            <div class="tab-pane fade" id="companyprofile">
+                            @*<div class="tab-pane fade" id="companyprofile">
                                 <div class="col-sm-3">
                                     <div class="product-image-wrapper">
                                         <div class="single-products">
@@ -358,7 +361,7 @@
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+                            </div>*@
 
                             <div class="tab-pane fade" id="tag">
                                 @Html.TagCloud(Model.CurrentDev)
@@ -441,7 +444,7 @@
                         </div>
                     </div><!--/category-tab-->
 
-                    <div class="recommended_items">
+                    @*<div class="recommended_items">
                         <!--recommended_items-->
                         <h2 class="title text-center">recommended items</h2>
 
@@ -531,7 +534,7 @@
                                 <i class="fa fa-angle-right"></i>
                             </a>
                         </div>
-                    </div><!--/recommended_items-->
+                    </div><!--/recommended_items-->*@
 
                 </div>
             </div>

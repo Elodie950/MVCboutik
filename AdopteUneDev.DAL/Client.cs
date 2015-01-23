@@ -195,6 +195,39 @@ namespace AdopteUneDev.DAL
             }
 
         }
+
+        public virtual bool ModifClient()
+        {
+            Client c = Client.getInfo(this.IdClient);
+
+            string query = @"UPDATE [AdopteUneDev].[dbo].[Client]
+                                        SET [CliName] = @CliName,
+                                            [CliFirstName] = @CliFirstName,
+                                            [CliMail] = @CliMail,
+                                            [CliCompany] = @CliCompany,
+                                            [CliLogin] = @CliLogin,
+                                            [CliPassword] = @CliPassword
+                                            WHERE [idClient] = @idClient";
+
+            Dictionary<string, object> valeurs = new Dictionary<string, object>();
+            valeurs.Add("idClient", this.IdClient);
+            valeurs.Add("CliName", this.CliName);
+            valeurs.Add("CliFirstName", this.CliFirstName);
+            valeurs.Add("CliMail", this.CliMail);
+            valeurs.Add("CliCompany", this.CliCompany);
+            valeurs.Add("CliLogin", this.CliLogin);
+            valeurs.Add("CliPassword", this.CliPassword);
+
+            if (GestionConnexion.Instance.saveData(query, GenerateKey.APP, valeurs))
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
         #endregion
+ 
     }
 }
